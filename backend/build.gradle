@@ -1,0 +1,43 @@
+plugins {
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-XMEMEServer'
+//sourceCompatibility = '1.8'
+
+
+repositories {
+    mavenCentral()
+}
+sourceSets {
+    main {
+        java {
+            srcDirs = ['source']
+        }
+        resources {
+            srcDir 'product_conf'
+        }
+    }
+}
+dependencies {
+    providedCompile 'org.apache.tomcat:tomcat-servlet-api:9.0.43'
+    compile 'junit:junit:4.12'
+    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.33'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.33'
+    compile 'org.glassfish.jersey.core:jersey-common:2.26'
+    compile 'org.glassfish.jersey.inject:jersey-hk2:2.26'
+    compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.4.27.Final'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    compile group: 'org.json', name: 'json', version: '20201115'
+
+}
+
+task copyReport(type: Copy) {
+    from file("$buildDir/product_conf/hibernate.cfg.xml")
+    into file("$buildDir/toArchive")
+}
+
+war {
+    webInf { from 'webapps/web.xml' }
+}

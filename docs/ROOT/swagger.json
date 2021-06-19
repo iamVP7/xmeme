@@ -1,0 +1,376 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is the swagger Docs for the Xmeme API",
+        "version": "1.0.0",
+        "title": "Xmeme",
+        "contact": {
+            "email": "shihan.viswa@gmail.com"
+        },
+        "license": {
+            "name": "Mozilla Public License 2.0",
+            "url": "https://www.mozilla.org/en-US/MPL/2.0/"
+        }
+    },
+    "host": "petstore.swagger.io",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "memes",
+            "description": "All API related to Memes"
+        },
+        {
+            "name": "singleMeme",
+            "description": "Operations on Single Meme"
+        },
+        {
+            "name": "authorMemes",
+            "description": "Memes by specific author"
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/memes": {
+            "post": {
+                "tags": [
+                    "memes"
+                ],
+                "summary": "Submit Meme detail",
+                "description": "Submit Meme detail to the backend",
+                "operationId": "addMeme",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "meme Submit post body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/create_meme_object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "on successful operation of adding the Meme",
+                        "schema": {
+                            "$ref": "#/definitions/meme_create_response"
+                        }
+                    },
+                    "409": {
+                        "description": "When same author submits same Meme and caption",
+                        "schema": {
+                            "$ref": "#/definitions/meme_duplicate_response"
+                        }
+                    },
+                    "404":{
+                        "description": "When any values are wrongly sent",
+                        "schema": {
+                            "$ref": "#/definitions/wrong_meme_details"
+                        }
+                    }
+                }
+            },
+            "get" :{
+                "tags": [
+                    "memes"
+                ],
+                "summary": "Get the recent submit memes",
+                "description": "Will respond back with recent 100 memes",
+                "operationId": "getMemes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response of fetching the Memes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/single_meme"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/memes/{id}":{
+            "get":{
+                "tags": [
+                    "singleMeme"
+                ],
+                "summary": "Get Specific Meme",
+                "description": "Get for specified meme",
+                "operationId": "getSingleMeme",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "id is the memeid which we want",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response of fetching the single Memes",
+                        "schema": {
+                            "$ref": "#/definitions/single_meme"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "singleMeme"
+                ],
+                "summary": "Update Specific Meme",
+                "description": "Update caption and/or URL of specific Meme",
+                "operationId": "updateSingleMeme",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "id is the memeid which we want",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "meme Submit post body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/update_meme_object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "If updated successfully"
+                    }
+                }
+            }
+        },
+        "/memes/by/{author_id}":{
+            "get" :{
+                "tags": [
+                    "authorMemes"
+                ],
+                "summary": "Get the memes by author",
+                "description": "Will respond back with recent 100 memes",
+                "operationId": "getMemesByAuthor",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "author_id",
+                        "description": "specific author id who create memes",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response of fetching the Memes by author",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/single_meme"
+                            }
+                        }
+                    }
+                }
+            }
+
+        },
+        "/memes/pageorder/{page_order_id}":{
+            "get" :{
+                "tags": [
+                    "memes"
+                ],
+                "summary": "Get the recent submit memes",
+                "description": "Will respond back with more 100 memes",
+                "operationId": "getMoreMemes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "page_order_id",
+                        "description": "To get next n 100 memes; if its 1 then 101-200 memes will come",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Response of fetching the Memes",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/single_meme"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "meme_create_response": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example" : 1
+                }
+            }
+        },
+        "meme_duplicate_response": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example" : "Meme already exist; Kindly upload different Meme"
+                }
+            }
+        },
+        "wrong_meme_details": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "example" : "Caption should be less than 95 chars",
+                    "enum": [
+                        "Caption should be less than 95 chars",
+                        "Name should be less than 45 char",
+                        "URL should not be more than 1000 chars and should end with jpeg or jpg or png"
+                    ]
+                }
+            }
+        },
+        "create_meme_object": {
+            "type": "object",
+            "required": ["name","url","caption"],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example" : "Xeme",
+                    "description": "Name of the author",
+                    "maxLength" : 50
+                },
+                "url": {
+                    "type": "string",
+                    "description": "URL of the Meme",
+                    "format": "uri",
+                    "example":"https://img-9gag-fun.9cache.com/photo/aLpMBWx_700bwp.webp",
+                    "maxLength" : 1000
+                },
+                "caption": {
+                    "type": "string",
+                    "description": "Caption of the specific Meme",
+                    "maxLength" : 100,
+                    "example": "Caption within less than 100 char"
+                }
+            }
+        },
+        "update_meme_object":{
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "URL of the Meme",
+                    "format": "uri",
+                    "example":"https://img-9gag-fun.9cache.com/photo/aLpMBWx_700bwp.webp",
+                    "maxLength" : 1000
+                },
+                "caption": {
+                    "type": "string",
+                    "description": "Caption of the specific Meme",
+                    "maxLength" : 100,
+                    "example": "Caption within less than 100 char"
+                }
+            }
+        },
+        "single_meme":{
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example" : "Xeme",
+                    "description": "Name of the author",
+                    "maxLength" : 50
+                },
+                "url": {
+                    "type": "string",
+                    "description": "URL of the Meme",
+                    "format": "uri",
+                    "example":"https://img-9gag-fun.9cache.com/photo/aLpMBWx_700bwp.webp",
+                    "maxLength" : 1000
+                },
+                "caption": {
+                    "type": "string",
+                    "description": "Caption of the specific Meme",
+                    "maxLength" : 100,
+                    "example": "Caption within less than 100 char"
+                },
+                "created_time": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "The time meme submitted",
+                    "example": 1613204458102
+                },
+                "creator_id":{
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "This is the unique id of author of meme",
+                    "example": 2
+                },
+                "id":{
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Unique ID of the submitted memes",
+                    "example": 12
+                }
+            }
+        }
+    }
+}
