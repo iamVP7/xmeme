@@ -293,4 +293,14 @@ public class MemeAPIHandler {
         }
         return ResponseConstructors.notFound();
     }
+
+    public Response getTestResponse() {
+
+        JSONObject responseJSON  = new JSONObject();
+        responseJSON.put(Constants.MESSAGE,"This is Test Message"); // NO I18N
+        return new ResponseConstructors.ResponseBuilder()
+                .setResponseCode(Constants.HTTP_FEATCH_SUCCESS)
+                .setClientJSON(responseJSON)
+                .build().getResponse();
+    }
 }

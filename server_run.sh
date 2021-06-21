@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd apache-tomcat-9.0.43/bin/
+cd tomcat/bin/
 
 ## Invoke catalin run script
 sh catalina.sh run &

@@ -9,8 +9,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 
-@Path("") // NO I18N
+@Path("api/v1/memes") // NO I18N
 public class MemeAPI {
+    private static final String URL_TEST = "/test"; // NO I18N
     private static final String URL_FETCH_SPECIFIC_MEME = "/{meme_id}"; // NO I18N
     private static final String URL_MORE_MEMES = "/pageorder/{page_order_id}"; // NO I18N
     private static final String URL_MEMES_BY_AUTHOR = "/by/{author_id}"; // NO I18N
@@ -18,6 +19,15 @@ public class MemeAPI {
     private static final String PP_MEME_ID = "meme_id"; // NO I18N
     private static final String PP_PAGE_ORDER_ID = "page_order_id"; // NO I18N
     private static final String PP_AUTHOR_ID = "author_id"; // NO I18N
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path(URL_TEST)
+    public Response getTestResponse() {
+        return new MemeAPIHandler().getTestResponse();
+    }
+
 
     /**
     This will give last 100 memes
