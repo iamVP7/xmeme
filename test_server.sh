@@ -9,9 +9,9 @@
 
 # Run the user’s installation steps which will install any necessary dependencies required for the server to run, with sudo permission
 
-chmod +x install.sh
+chmod +x install_product.sh
 
-sudo ./install.sh
+sudo ./install_product.sh
 
 
 # 1. Run the user’s server execution steps which will bring up the server
