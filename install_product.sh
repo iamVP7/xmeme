@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo y | sudo apt-get update
 ## Install JDK 8 first
 echo y | sudo apt-get install openjdk-8-jdk
 

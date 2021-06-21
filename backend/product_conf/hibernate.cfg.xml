@@ -21,7 +21,7 @@
         <!-- The below is for MySQL; If you use change accordingly-->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/xmeme</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/xmeme?autoReconnect=true&amp;useSSL=false</property>
 
         <property name="hibernate.current_session_context_class">thread</property>
 
