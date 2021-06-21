@@ -4,17 +4,19 @@ import com.xmeme.api.processor.XMemeException;
 import com.xmeme.utils.APIErrorMessage;
 import com.xmeme.utils.Constants;
 import com.xmeme.utils.IOCommonUtil;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ClientMeme {
 
-    private String name;
-    private String url;
-    private String caption;
+    @Getter @Setter private String name;
+    @Getter @Setter private String url;
+    @Getter @Setter private String caption;
 
-    public String getName() {
+    /*public String getName() {
         return name;
     }
 
@@ -37,7 +39,7 @@ public class ClientMeme {
     public void setCaption(String caption) {
         this.caption = caption;
     }
-
+*/
     @Override
     public String toString() {
         return this.name + this.url + this.caption;

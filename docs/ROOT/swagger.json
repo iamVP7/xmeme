@@ -33,7 +33,7 @@
         "http"
     ],
     "paths": {
-        "/memes": {
+        "/memes/api/v1/memes": {
             "post": {
                 "tags": [
                     "memes"
@@ -105,7 +105,7 @@
                 }
             }
         },
-        "/memes/{id}":{
+        "/memes/api/v1/memes/{id}":{
             "get":{
                 "tags": [
                     "singleMeme"
@@ -177,7 +177,7 @@
                 }
             }
         },
-        "/memes/by/{author_id}":{
+        "/memes/api/v1/memes/by/{author_id}":{
             "get" :{
                 "tags": [
                     "authorMemes"
@@ -215,7 +215,7 @@
             }
 
         },
-        "/memes/pageorder/{page_order_id}":{
+        "/memes/api/v1/memes/pageorder/{page_order_id}":{
             "get" :{
                 "tags": [
                     "memes"

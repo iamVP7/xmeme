@@ -8,6 +8,7 @@ public class Constants {
     public static final String CLIENT_KEY_CAPTION = "caption" ; //NO I18N
 
     public static final String MESSAGE = "message"; //NO I18N
+    public static final String MESSAGE_2 = "message_2"; //NO I18N
     public static final String CLIENT_MEME_ID = "id"; //NO I18N
     public static final String CLIENT_CREATED_TIME = "created_time"; //NO I18N
 

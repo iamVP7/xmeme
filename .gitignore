@@ -3,3 +3,5 @@
 
 jdk/*
 tomcat/*
+backend/build/*
+backend/.idea/*

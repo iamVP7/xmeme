@@ -10,7 +10,7 @@
         <property name="hibernate.connection.username">xmeme</property>
 
         <!-- change the password -->
-        <property name="hibernate.connection.password">xmememysql</property>
+        <property name="hibernate.connection.password">Xmeme_123</property>
 
         <!-- limit threads based on the configuration -->
         <property name="hibernate.connection.pool_size">10</property>
